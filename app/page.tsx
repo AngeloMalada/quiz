@@ -71,7 +71,7 @@ function Homepage({}: Props) {
     <div className="h-screen px-10">
       <div className="pt-[10vh] mx-auto text-center flex flex-col gap-10">
         <div className="flex flex-col gap-2">
-          <h1>Pitanje prvo</h1>
+          <h1>question {i + 1}</h1>
           <h2>{score}</h2>
           <span>{pitanja[i].pitanje}</span>
         </div>
