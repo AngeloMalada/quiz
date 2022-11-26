@@ -11,20 +11,37 @@ const pitanja = [
       { odgovor: "KOGA BOLI KURAC", tocan: false },
     ],
   },
+  {
+    pitanje: "koji dile ti je omiljeni",
+    odgovori: [
+      { odgovor: "dile", tocan: false },
+      { odgovor: "dile", tocan: false },
+      { odgovor: "dile", tocan: false },
+      { odgovor: "nijedan", tocan: true },
+    ],
+  },
 ];
 
 type Props = {};
 
 function Homepage({}: Props) {
   const [rezultat, setRezultat] = React.useState("");
+  const [i, setI] = React.useState(0);
   const handleOptionChange = (e: any) => {
     setRezultat(e.target.value);
   };
   const handleClick = () => {
-    pitanja[0].odgovori.map((odgovor) => {
+    pitanja[i].odgovori.map((odgovor) => {
       if (odgovor.tocan === true) {
         if (odgovor.odgovor === rezultat) {
           alert("tocno");
+          if (i < pitanja.length - 1) {
+            setI(i + 1);
+          } else {
+            alert("kraj");
+            setI(0);
+          }
+          console.log(i);
         } else {
           alert("netocno");
         }
@@ -37,10 +54,10 @@ function Homepage({}: Props) {
       <div className="pt-[10vh] mx-auto text-center flex flex-col gap-10">
         <div className="flex flex-col gap-2">
           <h1>Pitanje prvo</h1>
-          <span>{pitanja[0].pitanje}</span>
+          <span>{pitanja[i].pitanje}</span>
         </div>
         <div className="flex flex-col gap-2 mx-auto">
-          {pitanja[0].odgovori.map((odgovor, index) => {
+          {pitanja[i].odgovori.map((odgovor, index) => {
             return (
               <div key={index} className="flex flex-row gap-2  items-center">
                 <input
