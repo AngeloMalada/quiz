@@ -30,9 +30,13 @@ function Homepage({}: Props) {
   const [color, setColor] = React.useState(0);
   const [score, setScore] = React.useState(0);
   const [odgovoreno, setOdgovoreno] = React.useState(false);
+  const [bgVar, setBgVar] = React.useState("");
 
   const handleOptionChange = (e: any) => {
     setRezultat(e.target.value);
+    //change color of clicked button
+
+    setBgVar("bg-gray-500");
   };
   const handleClick = () => {
     pitanja[i].odgovori.map((odgovor) => {
@@ -78,30 +82,45 @@ function Homepage({}: Props) {
         <div className="flex flex-col gap-2 mx-auto w-1/2">
           {pitanja[i].odgovori.map((odgovor, index) => {
             return (
-              <div key={index} className="flex flex-row gap-2  items-center  ">
-                {!odgovoreno ? (
-                  <input
-                    type="radio"
-                    name="odgovor"
-                    onChange={handleOptionChange}
-                    value={odgovor.odgovor}
-                    className="w-[20px] h-[20px]"
-                  />
-                ) : (
-                  <div className="w-5 h-5"></div>
-                )}
-                <span
-                  className={
-                    color === 1
-                      ? odgovor.tocan === true
-                        ? "bg-green-500 w-full rounded-xl p-2"
-                        : "bg-red-500 w-full rounded-xl p-2"
-                      : " w-full rounded-xl p-2"
-                  }
-                >
-                  {odgovor.odgovor}
-                </span>
-              </div>
+              // <div key={index} className="flex flex-row gap-2  items-center  ">
+              //   {!odgovoreno ? (
+              //     <input
+              //       type="radio"
+              //       name="odgovor"
+              //       onChange={handleOptionChange}
+              //       value={odgovor.odgovor}
+              //       className="w-[20px] h-[20px]"
+              //     />
+              //   ) : (
+              //     <div className="w-5 h-5"></div>
+              //   )}
+              //   <span
+              //     className={
+              //       color === 1
+              //         ? odgovor.tocan === true
+              //           ? "bg-green-500 w-full rounded-xl p-2"
+              //           : "bg-red-500 w-full rounded-xl p-2"
+              //         : " w-full rounded-xl p-2"
+              //     }
+              //   >
+              //     {odgovor.odgovor}
+              //   </span>
+              // </div>
+              <button
+                key={index}
+                className={
+                  color === 1
+                    ? odgovor.tocan === true
+                      ? "bg-green-500 w-full rounded-xl p-2"
+                      : "bg-red-500 w-full rounded-xl p-2"
+                    : " w-full rounded-xl p-2 border border-solid  border-gray-500 " +
+                      (odgovor.odgovor === rezultat ? `${bgVar}` : "")
+                }
+                value={odgovor.odgovor}
+                onClick={handleOptionChange}
+              >
+                {odgovor.odgovor}
+              </button>
             );
           })}
           <div className="flex flex-row gap-10 ml-5 justify-center">
